@@ -134,7 +134,6 @@ jobs:
           variable_prefix: "%"
           variable_suffix: "%"
           payload: "{\"message\": \"Hello, world!\"}"
-          payload_isfile: false
 ```
 
 ### 📚 Guide
