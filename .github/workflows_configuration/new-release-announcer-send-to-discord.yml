@@ -10,8 +10,8 @@ embeds:
     # footer:
       # text:
       # icon_url:
-    # image:
-      # url:
+    image:
+      url: "https://i.imgur.com/O95tqRP.png"
     thumbnail:
       url: "https://i.imgur.com/knmLbFg.png"
     # video:
