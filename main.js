@@ -36,7 +36,9 @@ const advancedDetermine = require("@hugoalh/advanced-determine"),
 	if (advancedDetermine.isStringSingleLine(variableSystem.suffix, { allowWhitespace: false }) !== true) {
 		throw new TypeError(`Argument "variable_suffix" must be type of string (non-nullable)! ([GitHub Action] Send To Pipedream)`);
 	};
-	if (advancedDetermine.isStringifyJSON(payload) !== false) {
+	if (advancedDetermine.isJSON(payload) !== false) {
+		githubAction.core.debug(`Payload (Stage DP): ${JSON.stringify(payload)} ([GitHub Action] Send To Pipedream)`);
+	} else if (advancedDetermine.isStringifyJSON(payload) !== false) {
 		githubAction.core.info(`Construct payload (stage MP). ([GitHub Action] Send To Pipedream)`);
 		payload = JSON.parse(payload);
 		githubAction.core.debug(`Payload (Stage MP): ${JSON.stringify(payload)} ([GitHub Action] Send To Pipedream)`);
