@@ -42,7 +42,7 @@ const advancedDetermine = require("@hugoalh/advanced-determine"),
 		githubAction.core.info(`Construct payload (stage MP). ([GitHub Action] Send To Pipedream)`);
 		payload = JSON.parse(payload);
 		githubAction.core.debug(`Payload (Stage MP): ${JSON.stringify(payload)} ([GitHub Action] Send To Pipedream)`);
-	} else if (payload.search(/[\n\r]/gu) === -1 && payload.search(/\.\.\//gu) === -1 && payload.search(/\.(jsonc?)|(ya?ml)$/gu) !== -1) {
+	} else if (advancedDetermine.isStringSingleLine(payload) === true && payload.search(/\.\.\//gu) === -1 && payload.search(/\.(jsonc?)|(ya?ml)$/gu) !== -1) {
 		payload = await require("./externalpayload.js")(payload);
 	} else {
 		throw new SyntaxError(`Argument "payload"'s value is not match the require pattern! ([GitHub Action] Send To Pipedream)`);
@@ -53,7 +53,7 @@ const advancedDetermine = require("@hugoalh/advanced-determine"),
 		payload: githubAction.github.context.payload
 	};
 	githubAction.core.info(`Analysis external variable list. ([GitHub Action] Send To Pipedream)`);
-	if (advancedDetermine.isJSON(variableSystem.list.external) !== true) {
+	if (advancedDetermine.isJSON(variableSystem.list.external) === false) {
 		switch (advancedDetermine.isString(variableSystem.list.external)) {
 			case false:
 				throw new TypeError(`Argument "variable_list_external" must be type of object JSON! ([GitHub Action] Send To Pipedream)`);
