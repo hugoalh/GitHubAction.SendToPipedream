@@ -36,9 +36,7 @@ const advancedDetermine = require("@hugoalh/advanced-determine"),
 	if (advancedDetermine.isStringSingleLine(variableSystem.suffix, { allowWhitespace: false }) !== true) {
 		throw new TypeError(`Argument "variable_suffix" must be type of string (non-nullable)! ([GitHub Action] Send To Pipedream)`);
 	};
-	if (advancedDetermine.isJSON(payload) !== false) {
-		githubAction.core.debug(`Payload (Stage DP): ${JSON.stringify(payload)} ([GitHub Action] Send To Pipedream)`);
-	} else if (advancedDetermine.isStringifyJSON(payload) !== false) {
+	if (advancedDetermine.isStringifyJSON(payload) !== false) {
 		githubAction.core.info(`Construct payload (stage MP). ([GitHub Action] Send To Pipedream)`);
 		payload = JSON.parse(payload);
 		githubAction.core.debug(`Payload (Stage MP): ${JSON.stringify(payload)} ([GitHub Action] Send To Pipedream)`);
@@ -53,23 +51,20 @@ const advancedDetermine = require("@hugoalh/advanced-determine"),
 		payload: githubAction.github.context.payload
 	};
 	githubAction.core.info(`Analysis external variable list. ([GitHub Action] Send To Pipedream)`);
-	if (advancedDetermine.isJSON(variableSystem.list.external) === false) {
-		switch (advancedDetermine.isString(variableSystem.list.external)) {
-			case false:
+	switch (advancedDetermine.isString(variableSystem.list.external)) {
+		case null:
+			githubAction.core.info(`External variable list is empty. ([GitHub Action] Send To Pipedream)`);
+			variableSystem.list.external = {};
+			break;
+		case true:
+			if (advancedDetermine.isStringifyJSON(variableSystem.list.external) === false) {
 				throw new TypeError(`Argument "variable_list_external" must be type of object JSON! ([GitHub Action] Send To Pipedream)`);
-			case null:
-				githubAction.core.info(`External variable list is empty. ([GitHub Action] Send To Pipedream)`);
-				variableSystem.list.external = {};
-				break;
-			case true:
-				if (advancedDetermine.isStringifyJSON(variableSystem.list.external) === false) {
-					throw new TypeError(`Argument "variable_list_external" must be type of object JSON! ([GitHub Action] Send To Pipedream)`);
-				};
-				variableSystem.list.external = JSON.parse(variableSystem.list.external);
-				break;
-			default:
-				throw new Error();
-		};
+			};
+			variableSystem.list.external = JSON.parse(variableSystem.list.external);
+			break;
+		case false:
+		default:
+			throw new TypeError(`Argument "variable_list_external" must be type of object JSON! ([GitHub Action] Send To Pipedream)`);
 	};
 	githubAction.core.info(`Tokenize variable list. ([GitHub Action] Send To Pipedream)`);
 	variableSystem.list.external = jsonFlatten(

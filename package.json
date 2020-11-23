@@ -1,6 +1,6 @@
 {
 	"name": "githubaction.sendtopipedream",
-	"version": "1.0.0-rc.1",
+	"version": "1.0.0",
 	"description": "A GitHub action to send data to Pipedream via SDK.",
 	"keywords": [
 		"github-action",
