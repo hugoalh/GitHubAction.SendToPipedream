@@ -85,7 +85,7 @@ To use variable in the supported argument, follow the pattern:
 
 #### `key`
 
-`<string.secret>` Pipedream SDK key. To obtain it, select workflow trigger with "SDK". It is impossible to regenerate it unless create a new workflow.
+`<string.secret>` Pipedream SDK key; To obtain it, select workflow trigger with "SDK"; It is impossible to regenerate it unless create a new workflow.
 
 #### `variable_join`
 
@@ -93,7 +93,7 @@ To use variable in the supported argument, follow the pattern:
 
 #### `variable_list_external`
 
-**\[Optional\]** `<object.json>` External variable list that will use in the data. Can import from other actions' output.
+**\[Optional\]** `<object.json>` External variable list that will use in the data; Can import from other actions' output.
 
 #### `variable_prefix`
 
@@ -111,7 +111,7 @@ To use variable in the supported argument, follow the pattern:
 
 #### `github_token`
 
-**\[Optional\]** `<string.secret = "${{github.token}}">` GitHub personal access token, only use when need to fetch the file specify in the argument [`payload`](#payload).
+**\[Optional\]** `<string.secret = "${{github.token}}">` GitHub personal access token; Only use when need to fetch the file specify in the argument [`payload`](#payload).
 
 ### 📤 Output
 
