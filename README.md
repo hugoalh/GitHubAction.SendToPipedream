@@ -125,8 +125,7 @@ jobs:
     name: "Send To Pipedream"
     runs-on: "ubuntu-latest"
     steps:
-      - id: "send-to-pipedream-main"
-        uses: "hugoalh/GitHubAction.SendToPipedream@v1.0.0"
+      - uses: "hugoalh/GitHubAction.SendToPipedream@v1.0.0"
         with:
           key: "${{secrets.PIPEDREAM_SDK_KEY}}"
           variable_join: "."
